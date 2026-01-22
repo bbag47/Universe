@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universe Proxy</title>
+    <style>
+        body { margin: 0; display: flex; flex-direction: column; height: 100vh; background: #1a1a2e; color: #fff; }
+        .nav { padding: 10px; display: flex; gap: 10px; background: #16213e; }
+        input { flex-grow: 1; padding: 8px; border-radius: 4px; border: none; }
+        button { padding: 8px 20px; background: #e94560; border: none; color: white; border-radius: 4px; cursor: pointer; }
+        iframe { flex-grow: 1; border: none; background: white; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <input type="text" id="urlInput" placeholder="https://wikipedia.org">
+        <button onclick="loadSite()">Teleport</button>
+    </div>
+    <iframe id="viewport"></iframe>
+
+    <script>
+        function loadSite() {
+            const url = document.getElementById('urlInput').value;
+            // Basic URL cleaning
+            const fullUrl = url.startsWith('http') ? url : 'https://' + url;
+            document.getElementById('viewport').src = `/proxy?url=${encodeURIComponent(fullUrl)}`;
+        }
+    </script>
+</body>
+</html>
